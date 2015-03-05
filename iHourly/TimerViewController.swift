@@ -19,10 +19,8 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var projectPickerTwo = UIPickerView()
     
     var timer = NSTimer()
-//    var starttime = NSTimeInterval()
     var starttime = NSDate()
-//    var timeRecorded: Double = 0
-    var timeRecorded: NSDateComponents?
+    var timeRecorded = NSDateComponents()
     var projects = ["Study", "Work", "Eat", "Transportation"]
     
     override func viewDidLoad() {
@@ -31,7 +29,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectPickerTwo.delegate = self
         projectPickerTwo.dataSource = self
         
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.size.width, 44))
+        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height/4))
         var item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done,
             target: self, action: "doneChooseProject")
         
@@ -40,23 +38,11 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectChosen.inputView = projectPickerTwo
         projectChosen.inputAccessoryView = toolbar
         projectChosen.text = "\(projects[0])"
-        
-        // test for core data
-//        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        if let context: NSManagedObjectContext = appDel.managedObjectContext {
-//            var request = NSFetchRequest(entityName: "Records")
-//            request.returnsObjectsAsFaults = false
-//            
-//            var results = context.executeFetchRequest(request, error: nil)
-//            
-//            println("\(results)")
-//        }
     }
 
     @IBAction func startTime(sender: UIButton) {
         if(controlButton.titleLabel?.text == "Start") {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimeView", userInfo: nil, repeats: true)
-//            starttime = NSDate.timeIntervalSinceReferenceDate()
             starttime = NSDate()
             controlButton.setTitle("Stop", forState: .Normal)
             controlButton.setTitleColor(UIColor.redColor(), forState: .Normal)
@@ -106,25 +92,19 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             let calendar = NSCalendar.currentCalendar()
             let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
 
-//            var current = NSDate.timeIntervalSinceReferenceDate()
             timeRecorded = calendar.components(flags, fromDate: starttime, toDate: current, options: nil)//current - starttime
-            println("\(starttime) \(current)")
+//            println("\(starttime) \(current)")
             
-           let hour = timeRecorded!.hour as Int
-           let hourLabel = "\(hour)"
-            //formateTime(hour)
-//            timeRecorded -= NSTimeInterval(hour*3600)
+            let hour = timeRecorded.hour
+            let hourLabel = formateTime(hour)
             
+            let minute = timeRecorded.minute
+            let minuteLabel = formateTime(minute)
             
-//            let minute = Int(timeRecorded / 60)
-            let minuteLabel =  timeRecorded?.minute//formateTime(minute)
-//            timeRecorded -= NSTimeInterval(minute*60)
+            let second = timeRecorded.second
+            let secondLabel = formateTime(second)
             
-//            let second = Int(timeRecorded)
-            let secondLabel = timeRecorded?.second//formateTime(second)
-            
-            
-            timeView.text = "\(hourLabel) : \(minuteLabel): \(secondLabel)"
+            timeView.text = "\(hourLabel) : \(minuteLabel) : \(secondLabel)"
         }
     }
     

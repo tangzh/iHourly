@@ -14,6 +14,9 @@
 		244F25E41AA40308005A5280 /* iHourlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25E31AA40308005A5280 /* iHourlyTests.swift */; };
 		244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25ED1AA41481005A5280 /* TimerViewController.swift */; };
 		249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */; };
+		249B57B41AA8E08B0070F85C /* RecordHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */; };
+		249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */; };
+		249B57B81AA8FC080070F85C /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B71AA8FC080070F85C /* Record.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		244F25E31AA40308005A5280 /* iHourlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iHourlyTests.swift; sourceTree = "<group>"; };
 		244F25ED1AA41481005A5280 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
 		249B57B11AA8C5580070F85C /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordHistoryTableViewController.swift; sourceTree = "<group>"; };
+		249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordHistoryTableViewCell.swift; sourceTree = "<group>"; };
+		249B57B71AA8FC080070F85C /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				244F25D11AA40307005A5280 /* Main.storyboard */,
+				249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */,
+				249B57B71AA8FC080070F85C /* Record.swift */,
+				249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */,
 				244F25CD1AA40307005A5280 /* AppDelegate.swift */,
 				244F25ED1AA41481005A5280 /* TimerViewController.swift */,
 				249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */,
@@ -215,7 +224,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */,
 				244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */,
+				249B57B81AA8FC080070F85C /* Record.swift in Sources */,
+				249B57B41AA8E08B0070F85C /* RecordHistoryTableViewController.swift in Sources */,
 				244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */,
 				249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */,
 			);
