@@ -8,6 +8,7 @@
 // Citation: http://rshankar.com/simple-stopwatch-app-in-swift/
 
 import UIKit
+import CoreData
 
 class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
 
@@ -18,8 +19,10 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var projectPickerTwo = UIPickerView()
     
     var timer = NSTimer()
-    var starttime = NSTimeInterval()
-    var timeRecorded: Double = 0
+//    var starttime = NSTimeInterval()
+    var starttime = NSDate()
+//    var timeRecorded: Double = 0
+    var timeRecorded: NSDateComponents?
     var projects = ["Study", "Work", "Eat", "Transportation"]
     
     override func viewDidLoad() {
@@ -37,12 +40,24 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectChosen.inputView = projectPickerTwo
         projectChosen.inputAccessoryView = toolbar
         projectChosen.text = "\(projects[0])"
+        
+        // test for core data
+//        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        if let context: NSManagedObjectContext = appDel.managedObjectContext {
+//            var request = NSFetchRequest(entityName: "Records")
+//            request.returnsObjectsAsFaults = false
+//            
+//            var results = context.executeFetchRequest(request, error: nil)
+//            
+//            println("\(results)")
+//        }
     }
 
     @IBAction func startTime(sender: UIButton) {
         if(controlButton.titleLabel?.text == "Start") {
-            timer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "updateTimeView", userInfo: nil, repeats: true)
-            starttime = NSDate.timeIntervalSinceReferenceDate()
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimeView", userInfo: nil, repeats: true)
+//            starttime = NSDate.timeIntervalSinceReferenceDate()
+            starttime = NSDate()
             controlButton.setTitle("Stop", forState: .Normal)
             controlButton.setTitleColor(UIColor.redColor(), forState: .Normal)
         }else if(controlButton.titleLabel?.text == "Stop") {
@@ -58,9 +73,18 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             message: "Do you want to save \n \(timeView.text!) \n to \(projectChosen.text!)?",
             preferredStyle: UIAlertControllerStyle.Alert
         )
+        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default)
             { (action: UIAlertAction!) -> Void in
+                if let context: NSManagedObjectContext = appDel.managedObjectContext {
+                    var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
+                    newRecord.setValue(self.projectChosen.text, forKey: "project")
+                    newRecord.setValue(self.starttime, forKey: "starttime")
+                    newRecord.setValue(NSDate(), forKey: "stoptime")
+                    
+                    context.save(nil)
+                }
             }
         )
         
@@ -78,20 +102,26 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func updateTimeView() {
         if timeView != nil {
-            var current = NSDate.timeIntervalSinceReferenceDate()
-            timeRecorded = current - starttime
+            var current = NSDate()
+            let calendar = NSCalendar.currentCalendar()
+            let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
+
+//            var current = NSDate.timeIntervalSinceReferenceDate()
+            timeRecorded = calendar.components(flags, fromDate: starttime, toDate: current, options: nil)//current - starttime
+            println("\(starttime) \(current)")
             
-            let hour = Int(timeRecorded / 3600)
-            let hourLabel = formateTime(hour)
-            timeRecorded -= NSTimeInterval(hour*3600)
+           let hour = timeRecorded!.hour as Int
+           let hourLabel = "\(hour)"
+            //formateTime(hour)
+//            timeRecorded -= NSTimeInterval(hour*3600)
             
             
-            let minute = Int(timeRecorded / 60)
-            let minuteLabel = formateTime(minute)
-            timeRecorded -= NSTimeInterval(minute*60)
+//            let minute = Int(timeRecorded / 60)
+            let minuteLabel =  timeRecorded?.minute//formateTime(minute)
+//            timeRecorded -= NSTimeInterval(minute*60)
             
-            let second = Int(timeRecorded)
-            let secondLabel = formateTime(second)
+//            let second = Int(timeRecorded)
+            let secondLabel = timeRecorded?.second//formateTime(second)
             
             
             timeView.text = "\(hourLabel) : \(minuteLabel): \(secondLabel)"

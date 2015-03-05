@@ -13,6 +13,7 @@
 		244F25D81AA40308005A5280 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 244F25D61AA40308005A5280 /* LaunchScreen.xib */; };
 		244F25E41AA40308005A5280 /* iHourlyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25E31AA40308005A5280 /* iHourlyTests.swift */; };
 		244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25ED1AA41481005A5280 /* TimerViewController.swift */; };
+		249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		244F25E21AA40308005A5280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		244F25E31AA40308005A5280 /* iHourlyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iHourlyTests.swift; sourceTree = "<group>"; };
 		244F25ED1AA41481005A5280 /* TimerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerViewController.swift; sourceTree = "<group>"; };
+		249B57B11AA8C5580070F85C /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +80,9 @@
 			isa = PBXGroup;
 			children = (
 				244F25D11AA40307005A5280 /* Main.storyboard */,
+				244F25CD1AA40307005A5280 /* AppDelegate.swift */,
 				244F25ED1AA41481005A5280 /* TimerViewController.swift */,
+				249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */,
 				244F25CB1AA40307005A5280 /* Supporting Files */,
 			);
 			path = iHourly;
@@ -88,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				244F25D61AA40308005A5280 /* LaunchScreen.xib */,
-				244F25CD1AA40307005A5280 /* AppDelegate.swift */,
 				244F25D41AA40307005A5280 /* Images.xcassets */,
 				244F25CC1AA40307005A5280 /* Info.plist */,
 			);
@@ -214,6 +217,7 @@
 			files = (
 				244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */,
 				244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */,
+				249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +423,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				249B57B11AA8C5580070F85C /* CoreData.xcdatamodel */,
+			);
+			currentVersion = 249B57B11AA8C5580070F85C /* CoreData.xcdatamodel */;
+			name = CoreData.xcdatamodeld;
+			path = ../CoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 244F25C01AA40307005A5280 /* Project object */;
 }
