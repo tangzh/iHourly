@@ -6,6 +6,6 @@
         <attribute name="stoptime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Records" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Records" positionX="-63" positionY="-18" width="128" height="88"/>
     </elements>
 </model>

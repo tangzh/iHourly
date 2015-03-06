@@ -44,20 +44,15 @@ class RecordHistoryTableViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
         return records.count
     }
 
@@ -66,6 +61,8 @@ class RecordHistoryTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("Record", forIndexPath: indexPath) as RecordHistoryTableViewCell
         var showRecord = [String:String]()
         let record = records[indexPath.row]
+        
+        println("\(record)")
         showRecord["project"] = record.valueForKey("project") as? String
         let localStarttime = getLocalDate( record.valueForKey("starttime") as? NSDate )
         showRecord["starttime"] = localStarttime

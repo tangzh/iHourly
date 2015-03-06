@@ -18,18 +18,37 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     var projectPickerTwo = UIPickerView()
     
-    var timer = NSTimer()
-    var starttime = NSDate()
+    private var timer = NSTimer()
+    private var starttime = NSDate()
     var timeRecorded = NSDateComponents()
     var projects = ["Study", "Work", "Eat", "Transportation"]
+    var recordNote: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        controlButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
+        refreshProjects()
+        initProjectPicker()
+        controlButton.setTitleColor(UIColor.uicolorFromHex(0x33691E), forState: .Normal)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        controlButton.layer.cornerRadius = 0.5 * controlButton.bounds.size.width
+    }
+    
+    func refreshProjects() {
+        if let oldProjects = NSUserDefaults.standardUserDefaults().objectForKey("History") as? Array<String> {
+            if oldProjects.count > projects.count {
+                projects = oldProjects
+            }
+        }
+    }
+    
+    func initProjectPicker() {
         projectPickerTwo.delegate = self
         projectPickerTwo.dataSource = self
         
-        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height/4))
+        var toolbar = UIToolbar(frame: CGRectMake(0, 0, self.view.bounds.size.width, 40))
         var item = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Done,
             target: self, action: "doneChooseProject")
         
@@ -50,12 +69,42 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             controlButton.setTitle("Start", forState: .Normal)
             timer.invalidate()
             showAlert()
-            controlButton.setTitleColor(UIColor.greenColor(), forState: .Normal)
+            controlButton.setTitleColor(UIColor.uicolorFromHex(0x2E7D32), forState: .Normal)
         }
     }
     
+    @IBAction func addNewProject(sender: AnyObject) {
+        var alert = UIAlertController(title: "New Project",
+            message: "Please Enter The Project Name",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        
+        alert.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Project Name"
+        }
+        
+        let saveAction = UIAlertAction(title: "Save",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+            
+            let textField = alert.textFields![0] as UITextField
+            if let projectName = textField.text {
+                self.projects.append(textField.text)
+                NSUserDefaults.standardUserDefaults().setObject(self.projects, forKey: "History")
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel",
+            style: .Default) { (action: UIAlertAction!) -> Void in
+        }
+        
+        alert.addAction(saveAction)
+        alert.addAction(cancelAction)
+        
+        presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func showAlert() {
-        var alert = UIAlertController(title: "Time Recorded",
+        var alert = UIAlertController(title: "Record Time",
             message: "Do you want to save \n \(timeView.text!) \n to \(projectChosen.text!)?",
             preferredStyle: UIAlertControllerStyle.Alert
         )
@@ -139,18 +188,21 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        projectChosen.text = "\(projects[row])"
+        projectChosen!.text = "\(projects[row])"
     }
     
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "addNote" {
+            if let anvc = segue.destinationViewController.contentViewController as? AddNoteViewController {
+                anvc.recordNote = recordNote
+            }
+        }
     }
-    */
+    
 
 }
