@@ -20,6 +20,7 @@
 		249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */; };
 		249B57B81AA8FC080070F85C /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B71AA8FC080070F85C /* Record.swift */; };
 		249B57BA1AA95BEC0070F85C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B91AA95BEC0070F85C /* Helper.swift */; };
+		24E81D2C1AAE59A60016145A /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		249B57B71AA8FC080070F85C /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		249B57B91AA95BEC0070F85C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				244F25D11AA40307005A5280 /* Main.storyboard */,
+				24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */,
 				242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */,
 				244F25ED1AA41481005A5280 /* TimerViewController.swift */,
 				247B832E1AAA2DF20080AC30 /* AddNoteViewController.swift */,
@@ -235,6 +238,7 @@
 			files = (
 				249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */,
 				249B57BA1AA95BEC0070F85C /* Helper.swift in Sources */,
+				24E81D2C1AAE59A60016145A /* RecordDetailViewController.swift in Sources */,
 				244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */,
 				249B57B81AA8FC080070F85C /* Record.swift in Sources */,
 				247B832F1AAA2DF20080AC30 /* AddNoteViewController.swift in Sources */,

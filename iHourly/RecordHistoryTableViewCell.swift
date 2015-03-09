@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class RecordHistoryTableViewCell: UITableViewCell {
-    var record: [String: String]? {
+    var record: Record? {
         didSet {
             updateUI()
         }
@@ -23,9 +23,9 @@ class RecordHistoryTableViewCell: UITableViewCell {
     
     func updateUI() {
         if let record = self.record {
-            projectNameLabel.text = record["project"]
-            startDateLabel.text = record["starttime"]
-            endDateLabel.text = record["stoptime"]
+            projectNameLabel.text = record.projectName
+            startDateLabel.text = record.getLocalDate(record.starttime)
+            endDateLabel.text = record.getLocalDate(record.stoptime)
         }
     }
     
@@ -39,5 +39,4 @@ class RecordHistoryTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

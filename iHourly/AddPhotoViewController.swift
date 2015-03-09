@@ -11,8 +11,32 @@ import MobileCoreServices
 
 class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate
  {
-
-
+    var record: Record?{
+        didSet {
+            updateUI()
+        }
+    }
+    
+    func updateUI() {
+        if let urlString = record?.photoUrl {
+            let url = NSURL(string: urlString)
+            let qos = Int(QOS_CLASS_USER_INITIATED.value)
+            dispatch_async(dispatch_get_global_queue(qos, 0)) { [weak self] in
+                if let imageData = NSData(contentsOfURL: url!) {
+                    if urlString == self?.record?.photoUrl {
+                        if let image = UIImage(data: imageData) {
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self?.imageView.image = image
+                                self?.makeRoomForImage()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
     @IBOutlet weak var imageView: UIImageView!
     
     // MARK: - Take photo
@@ -34,9 +58,29 @@ class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         imageView.image = image
         makeRoomForImage()
-        //saveImageInWaypoint()
+        saveImageInRecord()
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func saveImageInRecord()
+    {
+        if let image = imageView.image {
+            if let imageData = UIImageJPEGRepresentation(image, 1.0) {
+                let fileManager = NSFileManager()
+                if let docsDir = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as? NSURL {
+                    let unique = NSDate.timeIntervalSinceReferenceDate()
+                    let url = docsDir.URLByAppendingPathComponent("\(unique).jpg")
+                    if let path = url.absoluteString {
+                        if imageData.writeToURL(url, atomically: true) {
+                            record?.photoUrl = path
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)

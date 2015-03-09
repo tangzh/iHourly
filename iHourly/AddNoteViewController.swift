@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class AddNoteViewController: UIViewController, UITextFieldDelegate {
     
-    var recordNote: String? { didSet { updateUI() } }
+    var record: Record? { didSet { updateUI() } }
 
     @IBOutlet weak var noteTextField: UITextField! { didSet { noteTextField.delegate = self } }
     
@@ -20,7 +21,7 @@ class AddNoteViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateUI() {
-        noteTextField?.text = recordNote?
+        noteTextField?.text = record?.note
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -39,6 +40,7 @@ class AddNoteViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneEditing(sender: UIBarButtonItem) {
+//        record?.saveToCoreData(UIApplication.sharedApplication().delegate as AppDelegate)
         presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -49,8 +51,8 @@ class AddNoteViewController: UIViewController, UITextFieldDelegate {
         let center = NSNotificationCenter.defaultCenter()
         let queue = NSOperationQueue.mainQueue()
         ntfObserver = center.addObserverForName(UITextFieldTextDidChangeNotification, object: noteTextField, queue: queue) { notification in
-            if self.recordNote != nil {
-                self.recordNote = self.noteTextField.text
+            if self.record != nil {
+                self.record?.note = self.noteTextField.text
             }
         }
     }

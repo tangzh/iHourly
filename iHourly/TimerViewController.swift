@@ -20,12 +20,12 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     @IBOutlet weak var addPhotoButton: UIButton!
     
     var projectPickerTwo = UIPickerView()
+    var record: Record?
     
     private var timer = NSTimer()
     private var starttime = NSDate()
     var timeRecorded = NSDateComponents()
     var projects = ["Study", "Work", "Eat", "Transportation"]
-    var recordNote: String?
     
     // MARK: -Init
     override func viewDidLoad() {
@@ -65,13 +65,14 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectChosen.text = "\(projects[0])"
     }
 
-    // MARK: -Timer
+    // MARK: - Timer
     @IBAction func startTime(sender: UIButton) {
         if(controlButton.titleLabel?.text == "Start") {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimeView", userInfo: nil, repeats: true)
             starttime = NSDate()
             controlButton.setTitle("Stop", forState: .Normal)
             controlButton.setTitleColor(UIColor.redColor(), forState: .Normal)
+            record = Record(data: nil)
         }else if(controlButton.titleLabel?.text == "Stop") {
             controlButton.setTitle("Start", forState: .Normal)
             timer.invalidate()
@@ -155,6 +156,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         alert.addAction(UIAlertAction(title: "OK", style: .Default)
             { (action: UIAlertAction!) -> Void in
                 self.saveToCoreData()
+                self.record = nil
             }
         )
         
@@ -189,15 +191,20 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // MARK: - Save to CoreData
     
     func saveToCoreData() {
-        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let context: NSManagedObjectContext = appDel.managedObjectContext {
-            var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
-            newRecord.setValue(self.projectChosen.text, forKey: "project")
-            newRecord.setValue(self.starttime, forKey: "starttime")
-            newRecord.setValue(NSDate(), forKey: "stoptime")
-            
-            context.save(nil)
-        }
+        record?.projectName = projectChosen.text
+        record?.starttime = starttime
+        record?.stoptime = NSDate()
+        record?.saveToCoreData(UIApplication.sharedApplication().delegate as AppDelegate)
+        
+//        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+//        if let context: NSManagedObjectContext = appDel.managedObjectContext {
+//            var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
+//            newRecord.setValue(self.projectChosen.text, forKey: "project")
+//            newRecord.setValue(self.starttime, forKey: "starttime")
+//            newRecord.setValue(NSDate(), forKey: "stoptime")
+//            
+//            context.save(nil)
+//        }
     }
 
     
@@ -206,27 +213,25 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addNote" {
+//            if let record = (sender as? MKAnnotationView)?.annotation as? GPX.Waypoint
             if let anvc = segue.destinationViewController.contentViewController as? AddNoteViewController {
-                anvc.recordNote = recordNote
-            }else if segue.identifier == "addPhoto" {
-                if let apvc = segue.destinationViewController.contentViewController as? AddPhotoViewController {
-                   // apvc.image = image
-                }
+                println("segue record")
+                anvc.record = record
+            }
+        }else if segue.identifier == "addPhoto" {
+            if let apvc = segue.destinationViewController.contentViewController as? AddPhotoViewController {
+                apvc.record = record
             }
         }
     }
-    
-//    @IBAction func addPhto(sender: AnyObject) {
-//        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-//            let picker =  UIImagePickerController()
-//            picker.sourceType = .Camera
-//            picker.mediaTypes = [kUTTypeImage]
-//            picker.delegate = self
-//            picker.allowsEditing = true
-//            presentViewController(picker, animated: true, completion: nil)
-//            
-//        }
-//    }
-    
+}
 
+extension UIViewController {
+    var contentViewController: UIViewController {
+        if let navcon = self as? UINavigationController {
+            return navcon.visibleViewController
+        } else {
+            return self
+        }
+    }
 }

@@ -59,18 +59,29 @@ class RecordHistoryTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Record", forIndexPath: indexPath) as RecordHistoryTableViewCell
-        var showRecord = [String:String]()
         let record = records[indexPath.row]
-        
-        println("\(record)")
-        showRecord["project"] = record.valueForKey("project") as? String
-        let localStarttime = getLocalDate( record.valueForKey("starttime") as? NSDate )
-        showRecord["starttime"] = localStarttime
-        let localEndtime = getLocalDate( record.valueForKey("stoptime") as? NSDate )
-        showRecord["stoptime"] = localEndtime
+
+//        println("\(record)")
+        var showRecord = Record(data: record)
         
         cell.record = showRecord
         return cell
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if let rdvc = segue.destinationViewController as? RecordDetailViewController {
+            if let id = segue.identifier {
+                switch(id) {
+                case "showRecordDetail":
+                    rdvc.title = "Detail"
+                    if let selectedPath = tableView.indexPathForSelectedRow() {
+                        rdvc.record = Record(data: records[selectedPath.row])
+                    }
+                default: println("entered deafult")
+                }
+            }
+        }
     }
     
 
