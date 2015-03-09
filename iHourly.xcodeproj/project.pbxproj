@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		242F49EB1AAE389E00658AEC /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */; };
 		244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25CD1AA40307005A5280 /* AppDelegate.swift */; };
 		244F25D31AA40307005A5280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 244F25D11AA40307005A5280 /* Main.storyboard */; };
 		244F25D51AA40307005A5280 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 244F25D41AA40307005A5280 /* Images.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		244F25C81AA40307005A5280 /* iHourly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHourly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		244F25CC1AA40307005A5280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		244F25CD1AA40307005A5280 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				244F25D11AA40307005A5280 /* Main.storyboard */,
+				242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */,
 				244F25ED1AA41481005A5280 /* TimerViewController.swift */,
 				247B832E1AAA2DF20080AC30 /* AddNoteViewController.swift */,
 				249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */,
@@ -237,6 +240,7 @@
 				247B832F1AAA2DF20080AC30 /* AddNoteViewController.swift in Sources */,
 				249B57B41AA8E08B0070F85C /* RecordHistoryTableViewController.swift in Sources */,
 				244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */,
+				242F49EB1AAE389E00658AEC /* AddPhotoViewController.swift in Sources */,
 				249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

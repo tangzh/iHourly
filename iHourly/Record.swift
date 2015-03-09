@@ -8,10 +8,15 @@
 
 import Foundation
 
-//public class Tweet {
+//public class Record {
 //    public let projectName: String
 //    public let starttime: NSDate
 //    public let endtime: NSDate
 //    
+//    init?(data: NSDictionary?) {
+//        if let projectName = data?.valueForKeyPath("projectName") as? String {
+//            self.projectName = projectName
+//        }
+//    }
 //    
 //}

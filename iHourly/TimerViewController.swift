@@ -9,12 +9,15 @@
 
 import UIKit
 import CoreData
+import MobileCoreServices
 
-class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var timeView: UILabel!
     @IBOutlet weak var projectChosen: UITextField!
     @IBOutlet weak var controlButton: UIButton!
+    @IBOutlet weak var addNoteButton: UIButton!
+    @IBOutlet weak var addPhotoButton: UIButton!
     
     var projectPickerTwo = UIPickerView()
     
@@ -24,6 +27,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     var projects = ["Study", "Work", "Eat", "Transportation"]
     var recordNote: String?
     
+    // MARK: -Init
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshProjects()
@@ -34,6 +38,8 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         controlButton.layer.cornerRadius = 0.5 * controlButton.bounds.size.width
+        addNoteButton.layer.cornerRadius = 0.5 * addNoteButton.bounds.size.width
+        addPhotoButton.layer.cornerRadius = 0.5 * addPhotoButton.bounds.size.width
     }
     
     func refreshProjects() {
@@ -59,6 +65,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectChosen.text = "\(projects[0])"
     }
 
+    // MARK: -Timer
     @IBAction func startTime(sender: UIButton) {
         if(controlButton.titleLabel?.text == "Start") {
             timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "updateTimeView", userInfo: nil, repeats: true)
@@ -73,6 +80,41 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    func updateTimeView() {
+        if timeView != nil {
+            var current = NSDate()
+            let calendar = NSCalendar.currentCalendar()
+            let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
+            
+            timeRecorded = calendar.components(flags, fromDate: starttime, toDate: current, options: nil)//current - starttime
+            //            println("\(starttime) \(current)")
+            
+            let hour = timeRecorded.hour
+            let hourLabel = formateTime(hour)
+            
+            let minute = timeRecorded.minute
+            let minuteLabel = formateTime(minute)
+            
+            let second = timeRecorded.second
+            let secondLabel = formateTime(second)
+            
+            timeView.text = "\(hourLabel) : \(minuteLabel) : \(secondLabel)"
+        }
+    }
+    
+    private func formateTime(inputTime: Int) -> String {
+        if( inputTime < 10 ) {
+            return "0\(inputTime)"
+        }else {
+            return "\(inputTime)"
+        }
+    }
+    
+    @IBAction func stopTimer(sender: UIButton) {
+        timer.invalidate()
+    }
+
+    // MARK: - Project picker
     @IBAction func addNewProject(sender: AnyObject) {
         var alert = UIAlertController(title: "New Project",
             message: "Please Enter The Project Name",
@@ -108,18 +150,11 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             message: "Do you want to save \n \(timeView.text!) \n to \(projectChosen.text!)?",
             preferredStyle: UIAlertControllerStyle.Alert
         )
-        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        
         
         alert.addAction(UIAlertAction(title: "OK", style: .Default)
             { (action: UIAlertAction!) -> Void in
-                if let context: NSManagedObjectContext = appDel.managedObjectContext {
-                    var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
-                    newRecord.setValue(self.projectChosen.text, forKey: "project")
-                    newRecord.setValue(self.starttime, forKey: "starttime")
-                    newRecord.setValue(NSDate(), forKey: "stoptime")
-                    
-                    context.save(nil)
-                }
+                self.saveToCoreData()
             }
         )
         
@@ -133,46 +168,6 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     func doneChooseProject() {
         projectChosen.resignFirstResponder()
-    }
-    
-    func updateTimeView() {
-        if timeView != nil {
-            var current = NSDate()
-            let calendar = NSCalendar.currentCalendar()
-            let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
-
-            timeRecorded = calendar.components(flags, fromDate: starttime, toDate: current, options: nil)//current - starttime
-//            println("\(starttime) \(current)")
-            
-            let hour = timeRecorded.hour
-            let hourLabel = formateTime(hour)
-            
-            let minute = timeRecorded.minute
-            let minuteLabel = formateTime(minute)
-            
-            let second = timeRecorded.second
-            let secondLabel = formateTime(second)
-            
-            timeView.text = "\(hourLabel) : \(minuteLabel) : \(secondLabel)"
-        }
-    }
-    
-    private func formateTime(inputTime: Int) -> String {
-        if( inputTime < 10 ) {
-            return "0\(inputTime)"
-        }else {
-            return "\(inputTime)"
-        }
-    }
-    
-    @IBAction func stopTimer(sender: UIButton) {
-        timer.invalidate()
-    }
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -191,6 +186,19 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         projectChosen!.text = "\(projects[row])"
     }
     
+    // MARK: - Save to CoreData
+    
+    func saveToCoreData() {
+        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let context: NSManagedObjectContext = appDel.managedObjectContext {
+            var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
+            newRecord.setValue(self.projectChosen.text, forKey: "project")
+            newRecord.setValue(self.starttime, forKey: "starttime")
+            newRecord.setValue(NSDate(), forKey: "stoptime")
+            
+            context.save(nil)
+        }
+    }
 
     
     // MARK: - Navigation
@@ -200,9 +208,25 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         if segue.identifier == "addNote" {
             if let anvc = segue.destinationViewController.contentViewController as? AddNoteViewController {
                 anvc.recordNote = recordNote
+            }else if segue.identifier == "addPhoto" {
+                if let apvc = segue.destinationViewController.contentViewController as? AddPhotoViewController {
+                   // apvc.image = image
+                }
             }
         }
     }
+    
+//    @IBAction func addPhto(sender: AnyObject) {
+//        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
+//            let picker =  UIImagePickerController()
+//            picker.sourceType = .Camera
+//            picker.mediaTypes = [kUTTypeImage]
+//            picker.delegate = self
+//            picker.allowsEditing = true
+//            presentViewController(picker, animated: true, completion: nil)
+//            
+//        }
+//    }
     
 
 }
