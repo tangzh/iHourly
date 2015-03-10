@@ -20,12 +20,14 @@ class RecordHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var projectNameLabel: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
+    @IBOutlet weak var timeLengthLabel: UILabel!
     
     func updateUI() {
         if let record = self.record {
             projectNameLabel.text = record.projectName
             startDateLabel.text = record.getLocalDate(record.starttime)
             endDateLabel.text = record.getLocalDate(record.stoptime)
+            timeLengthLabel.text = record.getFormatTimeLength()
         }
     }
     

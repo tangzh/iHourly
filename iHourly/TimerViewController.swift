@@ -24,6 +24,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     
     private var timer = NSTimer()
     private var starttime = NSDate()
+    private var stoptime = NSDate()
     var timeRecorded = NSDateComponents()
     var projects = ["Study", "Work", "Eat", "Transportation"]
     
@@ -75,6 +76,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             record = Record(data: nil)
         }else if(controlButton.titleLabel?.text == "Stop") {
             controlButton.setTitle("Start", forState: .Normal)
+            stoptime = NSDate()
             timer.invalidate()
             showAlert()
             controlButton.setTitleColor(UIColor.uicolorFromHex(0x2E7D32), forState: .Normal)
@@ -103,6 +105,12 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         }
     }
     
+    func resetTimeView() {
+        if timeView != nil {
+             timeView.text = "00 : 00 : 00"
+        }
+    }
+    
     private func formateTime(inputTime: Int) -> String {
         if( inputTime < 10 ) {
             return "0\(inputTime)"
@@ -110,9 +118,29 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             return "\(inputTime)"
         }
     }
-    
-    @IBAction func stopTimer(sender: UIButton) {
-        timer.invalidate()
+
+    func showAlert() {
+        var alert = UIAlertController(title: "Record Time",
+            message: "Do you want to save \n \(timeView.text!) \n to \(projectChosen.text!)?",
+            preferredStyle: UIAlertControllerStyle.Alert
+        )
+        
+        
+        alert.addAction(UIAlertAction(title: "OK", style: .Default)
+            { (action: UIAlertAction!) -> Void in
+                self.saveToCoreData()
+                self.record = nil
+                self.resetTimeView()
+            }
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default)
+            { (action: UIAlertAction!) -> Void in
+                self.resetTimeView()
+            }
+        )
+        
+        presentViewController(alert, animated: true, completion: nil)
     }
 
     // MARK: - Project picker
@@ -131,8 +159,11 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             
             let textField = alert.textFields![0] as UITextField
             if let projectName = textField.text {
-                self.projects.append(textField.text)
-                NSUserDefaults.standardUserDefaults().setObject(self.projects, forKey: "History")
+                if projectName != "" {
+                    self.projects.append(projectName)
+                    NSUserDefaults.standardUserDefaults().setObject(self.projects, forKey: "History")
+                    self.projectChosen.text = "\(projectName)"
+                }
             }
         }
         
@@ -142,28 +173,6 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         
         alert.addAction(saveAction)
         alert.addAction(cancelAction)
-        
-        presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func showAlert() {
-        var alert = UIAlertController(title: "Record Time",
-            message: "Do you want to save \n \(timeView.text!) \n to \(projectChosen.text!)?",
-            preferredStyle: UIAlertControllerStyle.Alert
-        )
-        
-        
-        alert.addAction(UIAlertAction(title: "OK", style: .Default)
-            { (action: UIAlertAction!) -> Void in
-                self.saveToCoreData()
-                self.record = nil
-            }
-        )
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Default)
-            { (action: UIAlertAction!) -> Void in
-            }
-        )
         
         presentViewController(alert, animated: true, completion: nil)
     }
@@ -193,27 +202,15 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     func saveToCoreData() {
         record?.projectName = projectChosen.text
         record?.starttime = starttime
-        record?.stoptime = NSDate()
+        record?.stoptime = stoptime
         record?.saveToCoreData(UIApplication.sharedApplication().delegate as AppDelegate)
-        
-//        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-//        if let context: NSManagedObjectContext = appDel.managedObjectContext {
-//            var newRecord = NSEntityDescription.insertNewObjectForEntityForName("Records", inManagedObjectContext: context) as NSManagedObject
-//            newRecord.setValue(self.projectChosen.text, forKey: "project")
-//            newRecord.setValue(self.starttime, forKey: "starttime")
-//            newRecord.setValue(NSDate(), forKey: "stoptime")
-//            
-//            context.save(nil)
-//        }
     }
-
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addNote" {
-//            if let record = (sender as? MKAnnotationView)?.annotation as? GPX.Waypoint
             if let anvc = segue.destinationViewController.contentViewController as? AddNoteViewController {
                 println("segue record")
                 anvc.record = record

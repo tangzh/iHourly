@@ -10,15 +10,7 @@ import Foundation
 import CoreData
 
 public class Record {
-//    public let projectName: String
-//    public let starttime: NSDate
-//    public let endtime: NSDate
-//    
-//    init?(data: NSDictionary?) {
-//        if let projectName = data?.valueForKeyPath("projectName") as? String {
-//            self.projectName = projectName
-//        }
-//    }
+
     var projectName: String?
     var starttime: NSDate?
     var stoptime: NSDate?
@@ -45,16 +37,20 @@ public class Record {
             newRecord.setValue(stoptime, forKey: "stoptime")
             newRecord.setValue(note, forKey: "note")
             newRecord.setValue(photoUrl, forKey: "photoURL")
+            newRecord.setValue(timeLength, forKey: "timeLength")
             
             context.save(nil)
         }
     }
     
-    func deleteFromCoreData(appDel: AppDelegate) {
-        if let context: NSManagedObjectContext = appDel.managedObjectContext {
-            
+    var timeLength: Int? {
+        get {
+            if stoptime != nil && starttime != nil{
+                return Int(stoptime!.timeIntervalSinceDate(starttime!))
+            }else {
+                return nil
+            }
         }
-            
     }
     
     func getLocalDate(inputDate: NSDate?) -> String {
@@ -69,5 +65,15 @@ public class Record {
             return localDate
         }
     }
-
+    
+    func getFormatTimeLength() -> String {
+        if let totalTime = timeLength {
+            let hour = totalTime / 3600
+            let min = (totalTime - hour*3600) / 60
+            let second = (totalTime - hour*3600) % 60
+            return "\(hour) hour \(min) min \(second) sec"
+        }else {
+            return "0s"
+        }
+    }
 }

@@ -10,12 +10,24 @@
         <scene sceneID="0sN-8l-hXN">
             <objects>
                 <tableViewController id="ipI-6e-xl0" customClass="RecordHistoryTableViewController" customModule="iHourly" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="22" sectionFooterHeight="22" id="gcd-zw-w5C">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="119" sectionHeaderHeight="10" sectionFooterHeight="10" id="gcd-zw-w5C">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <segmentedControl key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="YIW-xc-1HF">
+                            <rect key="frame" x="0.0" y="64" width="600" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Newest"/>
+                                <segment title="Project"/>
+                                <segment title="Longest"/>
+                            </segments>
+                            <connections>
+                                <action selector="changeCriterion:" destination="ipI-6e-xl0" eventType="valueChanged" id="gk1-46-cWK"/>
+                            </connections>
+                        </segmentedControl>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Record" rowHeight="99" id="8SS-RR-stN" customClass="RecordHistoryTableViewCell" customModule="iHourly" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Record" rowHeight="119" id="8SS-RR-stN" customClass="RecordHistoryTableViewCell" customModule="iHourly" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8SS-RR-stN" id="GQd-JR-Y5E">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -27,19 +39,19 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0eV-S4-IOX">
-                                            <rect key="frame" x="8" y="40" width="37" height="21"/>
+                                            <rect key="frame" x="8" y="60" width="37" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LvU-PX-BLl">
-                                            <rect key="frame" x="8" y="69" width="18" height="21"/>
+                                            <rect key="frame" x="8" y="89" width="18" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gad-VU-vQR">
-                                            <rect key="frame" x="53" y="40" width="506" height="21"/>
+                                            <rect key="frame" x="53" y="60" width="506" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="86h-6H-mtI"/>
                                                 <constraint firstAttribute="width" constant="533" id="bFH-rw-uB0"/>
@@ -55,7 +67,7 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNK-Qf-J1K">
-                                            <rect key="frame" x="53" y="69" width="506" height="21"/>
+                                            <rect key="frame" x="53" y="89" width="506" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="a7e-fx-Q9d"/>
                                                 <constraint firstAttribute="width" constant="533" id="ho1-0X-0oR"/>
@@ -70,11 +82,18 @@
                                                 </mask>
                                             </variation>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yEy-Mm-vwt">
+                                            <rect key="frame" x="540" y="7" width="19" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="LvU-PX-BLl" firstAttribute="leading" secondItem="0eV-S4-IOX" secondAttribute="leading" id="0rV-Pt-5WF"/>
                                         <constraint firstItem="LvU-PX-BLl" firstAttribute="top" secondItem="0eV-S4-IOX" secondAttribute="bottom" constant="8" symbolic="YES" id="2g5-kY-d39"/>
                                         <constraint firstItem="0eV-S4-IOX" firstAttribute="top" secondItem="ieh-0E-hy8" secondAttribute="bottom" constant="8" symbolic="YES" id="79b-j0-f3l"/>
+                                        <constraint firstItem="yEy-Mm-vwt" firstAttribute="trailing" secondItem="Gad-VU-vQR" secondAttribute="trailing" id="Dee-uw-jyP"/>
                                         <constraint firstItem="vNK-Qf-J1K" firstAttribute="trailing" secondItem="Gad-VU-vQR" secondAttribute="trailing" id="GD7-Ug-CHx"/>
                                         <constraint firstItem="LvU-PX-BLl" firstAttribute="bottom" secondItem="GQd-JR-Y5E" secondAttribute="bottomMargin" id="Jc4-wP-S4Q"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="Gad-VU-vQR" secondAttribute="bottom" constant="29" id="PIH-Dj-EPT"/>
@@ -83,6 +102,7 @@
                                         <constraint firstItem="vNK-Qf-J1K" firstAttribute="leading" secondItem="Gad-VU-vQR" secondAttribute="leading" id="f4k-oF-jhh"/>
                                         <constraint firstItem="vNK-Qf-J1K" firstAttribute="baseline" secondItem="LvU-PX-BLl" secondAttribute="baseline" id="gRS-de-YMy"/>
                                         <constraint firstItem="0eV-S4-IOX" firstAttribute="baseline" secondItem="Gad-VU-vQR" secondAttribute="baseline" id="mTb-pY-Sbv"/>
+                                        <constraint firstItem="yEy-Mm-vwt" firstAttribute="baseline" secondItem="ieh-0E-hy8" secondAttribute="baseline" id="q7T-tM-nBd"/>
                                         <constraint firstItem="Gad-VU-vQR" firstAttribute="top" secondItem="ieh-0E-hy8" secondAttribute="bottom" constant="11" id="tIy-JS-982"/>
                                         <constraint firstItem="Gad-VU-vQR" firstAttribute="leading" secondItem="0eV-S4-IOX" secondAttribute="trailing" constant="8" symbolic="YES" id="xz6-Zc-MCS"/>
                                         <constraint firstItem="ieh-0E-hy8" firstAttribute="top" secondItem="GQd-JR-Y5E" secondAttribute="topMargin" id="yIK-ES-GfI"/>
@@ -100,6 +120,7 @@
                                     <outlet property="endDateLabel" destination="vNK-Qf-J1K" id="XNQ-fE-tgI"/>
                                     <outlet property="projectNameLabel" destination="ieh-0E-hy8" id="dYv-6q-mUi"/>
                                     <outlet property="startDateLabel" destination="Gad-VU-vQR" id="5zi-qO-aZC"/>
+                                    <outlet property="timeLengthLabel" destination="yEy-Mm-vwt" id="ddh-Qp-RZc"/>
                                     <segue destination="Hu5-cw-Bz7" kind="show" identifier="showRecordDetail" id="hjl-Km-7a2"/>
                                 </connections>
                             </tableViewCell>
@@ -110,6 +131,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="History" id="vJL-gd-50q"/>
+                    <connections>
+                        <outlet property="sortCriterion" destination="YIW-xc-1HF" id="Lvo-Ma-8FA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hP-9B-49G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

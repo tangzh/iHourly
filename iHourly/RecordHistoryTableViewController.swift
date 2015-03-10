@@ -10,36 +10,64 @@ import UIKit
 import CoreData
 
 class RecordHistoryTableViewController: UITableViewController {
-    var records = [NSManagedObject]()
+    
+    var records = [[NSManagedObject]]()
+    var sections = [String]()
+    
+    // MARK: - Sort Criterion
+    @IBOutlet weak var sortCriterion: UISegmentedControl!
+    @IBAction func changeCriterion(sender: UISegmentedControl) {
+        sections.removeAll()
+        records.removeAll()
+        refresh()
+        tableView.reloadData()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+    func refresh() {
+        
         var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let context: NSManagedObjectContext = appDel.managedObjectContext {
             var request = NSFetchRequest(entityName: "Records")
             request.returnsObjectsAsFaults = false
-            if let results = context.executeFetchRequest(request, error: nil) {
-                records = results as Array<NSManagedObject>
+            if let results = context.executeFetchRequest(request, error: nil) as? Array<NSManagedObject>{
+                if results.count > 0{
+                    switch(self.sortCriterion.selectedSegmentIndex) {
+                    case 0:
+                        records.append(results.reverse())
+                        sections.append("time")
+                    case 1:
+                        for record in results {
+                            if let projectName = record.valueForKey("project") as? String {
+                                if(!contains(sections, projectName)) {
+                                    sections.append(projectName)
+                                    records.append([NSManagedObject]())
+                                }
+                                if let index = find(sections, projectName) {
+                                    records[index].append(record)
+                                }
+                            }
+                        }
+                    case 2:
+                        records.append(results.sorted({ $0.valueForKey("timeLength") as? Int > $1.valueForKey("timeLength") as? Int }))
+                        sections.append("Longest")
+                    default: break
+                    }
+                }
             }
         }
     }
     
-    // to format the date to current timezone
-    func getLocalDate(inputDate: NSDate?) -> String {
-        if inputDate == nil {
-            return " "
-        }else {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle //Set time style
-            dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle //Set date style
-            dateFormatter.timeZone = NSTimeZone()
-            let localDate = dateFormatter.stringFromDate(inputDate!)
-            return localDate
-        }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        sections.removeAll()
+        records.removeAll()
+        refresh()
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,19 +77,24 @@ class RecordHistoryTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return sections.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return records.count
+        return records[section].count
+    }
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection: Int) -> String {
+        return sections[titleForHeaderInSection]
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Record", forIndexPath: indexPath) as RecordHistoryTableViewCell
-        let record = records[indexPath.row]
+        let record = records[indexPath.section][indexPath.row]
 
-//        println("\(record)")
+        // println("\(record)")
+        
         var showRecord = Record(data: record)
         
         cell.record = showRecord
@@ -76,7 +109,7 @@ class RecordHistoryTableViewController: UITableViewController {
                 case "showRecordDetail":
                     rdvc.title = "Detail"
                     if let selectedPath = tableView.indexPathForSelectedRow() {
-                        rdvc.record = Record(data: records[selectedPath.row])
+                        rdvc.record = Record(data: records[selectedPath.section][selectedPath.row])
                     }
                 default: println("entered deafult")
                 }
@@ -93,12 +126,12 @@ class RecordHistoryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            let recordToDelete = records[indexPath.row]
+            let recordToDelete = records[indexPath.section][indexPath.row]
             var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
             if let context: NSManagedObjectContext = appDel.managedObjectContext {
                 context.deleteObject(recordToDelete)
             }
-            records.removeAtIndex(indexPath.row)
+            records[indexPath.section].removeAtIndex(indexPath.row)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         } else if editingStyle == .Insert {

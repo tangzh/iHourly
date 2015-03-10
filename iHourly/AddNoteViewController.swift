@@ -34,11 +34,6 @@ class AddNoteViewController: UIViewController, UITextViewDelegate {
         return true
     }
     
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         startObservingTextFields()
