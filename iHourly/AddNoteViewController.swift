@@ -9,25 +9,35 @@
 import UIKit
 import CoreData
 
-class AddNoteViewController: UIViewController, UITextFieldDelegate {
+class AddNoteViewController: UIViewController, UITextViewDelegate {
     
     var record: Record? { didSet { updateUI() } }
 
-    @IBOutlet weak var noteTextField: UITextField! { didSet { noteTextField.delegate = self } }
+    @IBOutlet weak var noteTextField: UITextView! {
+        didSet {
+            noteTextField.delegate = self
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        noteTextField.becomeFirstResponder()
     }
     
     func updateUI() {
         noteTextField?.text = record?.note
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
+    func textViewShouldEndEditing(textView: UITextView) -> Bool {
+        textView.resignFirstResponder()
         return true
     }
+    
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        textField.resignFirstResponder()
+//        return true
+//    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -50,7 +60,7 @@ class AddNoteViewController: UIViewController, UITextFieldDelegate {
     {
         let center = NSNotificationCenter.defaultCenter()
         let queue = NSOperationQueue.mainQueue()
-        ntfObserver = center.addObserverForName(UITextFieldTextDidChangeNotification, object: noteTextField, queue: queue) { notification in
+        ntfObserver = center.addObserverForName(UITextViewTextDidChangeNotification, object: noteTextField, queue: queue) { notification in
             if self.record != nil {
                 self.record?.note = self.noteTextField.text
             }

@@ -50,6 +50,12 @@ public class Record {
         }
     }
     
+    func deleteFromCoreData(appDel: AppDelegate) {
+        if let context: NSManagedObjectContext = appDel.managedObjectContext {
+            
+        }
+            
+    }
     
     func getLocalDate(inputDate: NSDate?) -> String {
         if inputDate == nil {

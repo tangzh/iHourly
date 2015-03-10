@@ -20,7 +20,7 @@ class RecordDetailViewController: UIViewController {
     @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var starttimeLabel: UILabel!
     @IBOutlet weak var stoptimeLabel: UILabel!
-    @IBOutlet weak var notesField: UITextView!
+    @IBOutlet weak var notesField: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
     func updateUI() {
