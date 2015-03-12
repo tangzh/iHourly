@@ -71,6 +71,7 @@ public class Record {
             let hour = totalTime / 3600
             let min = (totalTime - hour*3600) / 60
             let second = (totalTime - hour*3600) % 60
+            var result = ""
             return "\(hour) hour \(min) min \(second) sec"
         }else {
             return "0s"

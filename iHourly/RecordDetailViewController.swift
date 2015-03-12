@@ -55,6 +55,11 @@ class RecordDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        imageView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: "changePhoto:") )
+    }
+    
+    func changePhoto() {
+        
     }
     
     func makeRoomForImage() {
