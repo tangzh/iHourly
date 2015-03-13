@@ -7,20 +7,30 @@
 //
 
 import UIKit
+import CoreData
 
 class ReportViewController: UIViewController {
 
+    @IBOutlet weak var reportView: ReportView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        println("will appear")
+        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+        if let context: NSManagedObjectContext = appDel.managedObjectContext {
+            var request = NSFetchRequest(entityName: "Records")
+            request.returnsObjectsAsFaults = false
+            if let results = context.executeFetchRequest(request, error: nil) as? Array<NSManagedObject>{
+                if results.count >= 0{
+                    reportView.records = results
+                }
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

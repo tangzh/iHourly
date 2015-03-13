@@ -19,15 +19,18 @@ class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate,
     
     func updateUI() {
         if let urlString = record?.photoUrl {
-            let url = NSURL(string: urlString)
-            let qos = Int(QOS_CLASS_USER_INITIATED.value)
-            dispatch_async(dispatch_get_global_queue(qos, 0)) { [weak self] in
-                if let imageData = NSData(contentsOfURL: url!) {
-                    if urlString == self?.record?.photoUrl {
-                        if let image = UIImage(data: imageData) {
-                            dispatch_async(dispatch_get_main_queue()) {
-                                self?.imageView.image = image
-                                self?.makeRoomForImage()
+            let fileManager = NSFileManager()
+            if let docsDir = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first as? NSURL{
+                let url = docsDir.URLByAppendingPathComponent(urlString)
+                let qos = Int(QOS_CLASS_USER_INITIATED.value)
+                dispatch_async(dispatch_get_global_queue(qos, 0)) { [weak self] in
+                    if let imageData = NSData(contentsOfURL: url) {
+                        if urlString == self?.record?.photoUrl {
+                            if let image = UIImage(data: imageData) {
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    self?.imageView.image = image
+                                    self?.makeRoomForImage()
+                                }
                             }
                         }
                     }
@@ -72,7 +75,9 @@ class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate,
                     let url = docsDir.URLByAppendingPathComponent("\(unique).jpg")
                     if let path = url.absoluteString {
                         if imageData.writeToURL(url, atomically: true) {
-                            record?.photoUrl = path
+                            record?.photoUrl = "\(unique).jpg"
+                            println("write in \(url)")
+                            println("store path in \(path)")
                         }
                     }
                 }

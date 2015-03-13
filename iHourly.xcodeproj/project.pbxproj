@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2406FF571AB2C741007B98E8 /* RecordDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406FF561AB2C741007B98E8 /* RecordDetailTableViewController.swift */; };
+		2406FF591AB2CBFC007B98E8 /* DetailTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406FF581AB2CBFC007B98E8 /* DetailTextTableViewCell.swift */; };
+		2406FF5B1AB2CC15007B98E8 /* DetailImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2406FF5A1AB2CC15007B98E8 /* DetailImageTableViewCell.swift */; };
 		242F49EB1AAE389E00658AEC /* AddPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */; };
 		244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244F25CD1AA40307005A5280 /* AppDelegate.swift */; };
 		244F25D31AA40307005A5280 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 244F25D11AA40307005A5280 /* Main.storyboard */; };
@@ -36,6 +39,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2406FF561AB2C741007B98E8 /* RecordDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDetailTableViewController.swift; sourceTree = "<group>"; };
+		2406FF581AB2CBFC007B98E8 /* DetailTextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTextTableViewCell.swift; sourceTree = "<group>"; };
+		2406FF5A1AB2CC15007B98E8 /* DetailImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailImageTableViewCell.swift; sourceTree = "<group>"; };
 		242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPhotoViewController.swift; sourceTree = "<group>"; };
 		244F25C81AA40307005A5280 /* iHourly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHourly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		244F25CC1AA40307005A5280 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 				24A071BB1AB01ED9003CB080 /* ReportView.swift */,
 				24A071B91AB01E98003CB080 /* ReportViewController.swift */,
 				24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */,
+				2406FF561AB2C741007B98E8 /* RecordDetailTableViewController.swift */,
+				2406FF581AB2CBFC007B98E8 /* DetailTextTableViewCell.swift */,
+				2406FF5A1AB2CC15007B98E8 /* DetailImageTableViewCell.swift */,
 				242F49EA1AAE389E00658AEC /* AddPhotoViewController.swift */,
 				244F25ED1AA41481005A5280 /* TimerViewController.swift */,
 				247B832E1AAA2DF20080AC30 /* AddNoteViewController.swift */,
@@ -247,11 +256,14 @@
 				24A071BC1AB01ED9003CB080 /* ReportView.swift in Sources */,
 				24E81D2C1AAE59A60016145A /* RecordDetailViewController.swift in Sources */,
 				244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */,
+				2406FF591AB2CBFC007B98E8 /* DetailTextTableViewCell.swift in Sources */,
 				24A071BA1AB01E98003CB080 /* ReportViewController.swift in Sources */,
 				249B57B81AA8FC080070F85C /* Record.swift in Sources */,
+				2406FF5B1AB2CC15007B98E8 /* DetailImageTableViewCell.swift in Sources */,
 				247B832F1AAA2DF20080AC30 /* AddNoteViewController.swift in Sources */,
 				249B57B41AA8E08B0070F85C /* RecordHistoryTableViewController.swift in Sources */,
 				244F25CE1AA40307005A5280 /* AppDelegate.swift in Sources */,
+				2406FF571AB2C741007B98E8 /* RecordDetailTableViewController.swift in Sources */,
 				242F49EB1AAE389E00658AEC /* AddPhotoViewController.swift in Sources */,
 				249B57B21AA8C5580070F85C /* CoreData.xcdatamodeld in Sources */,
 			);

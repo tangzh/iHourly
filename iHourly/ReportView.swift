@@ -10,16 +10,22 @@ import UIKit
 import CoreData
 
 class ReportView: UIView {
-
     
-    var records = [NSManagedObject]()
+    var records: Array<NSManagedObject> = [NSManagedObject]() {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
     var projects = [String : Double]()
     var projectsPercentage = [String : Double]()
     var chartPart = 0.8
     
+//    var selfWidth = self.bounds.size.width
+//    var selfHeight = self.bounds.size.height
+    
     var viewCenter: CGPoint {
         var centerFromView = convertPoint(center, fromView: superview)
-        return CGPointMake(centerFromView.x , centerFromView.y * CGFloat(chartPart))
+        return CGPointMake(self.bounds.midX, self.bounds.midY * CGFloat(chartPart))
     }
     var viewRadius: CGFloat {
         return min(bounds.size.width, bounds.size.height) / 2 * CGFloat(chartPart)
@@ -30,39 +36,29 @@ class ReportView: UIView {
     var notationsPerRow = 3
     private var notationDistanceRatio = 50
     private var notationSize: CGSize {
-        if let view = superview  {
-            let distance = view.bounds.size.width / CGFloat(notationDistanceRatio)
-            let totalWidth = view.bounds.size.width - CGFloat(notationsPerRow-1)*distance
-            let width = totalWidth / CGFloat(notationsPerRow)
-            let height = 10
-            return CGSize(width: width, height: CGFloat(height))
-        }else {
-            return CGSize(width: CGFloat(0), height: CGFloat(0))
-        }
+        let view = self
+        let distance = view.bounds.size.width / CGFloat(notationDistanceRatio)
+        let totalWidth = view.bounds.size.width - CGFloat(notationsPerRow-1)*distance
+        let width = totalWidth / CGFloat(notationsPerRow)
+        let height = 20
+        return CGSize(width: width, height: CGFloat(height))
     }
-
 
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func drawRect(rect: CGRect) {
-        getRecords()
+        projects.removeAll()
+        projectsPercentage.removeAll()
+        for view in self.subviews  {
+//            if view is UILabel {
+//               view.removeFromSuperview()
+//            }
+            view.removeFromSuperview()
+        }
+        
         getGroupedProjects()
         drawPieParts()
-        drawNotations()
-    }
-    
-    func getRecords() {
-        var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        if let context: NSManagedObjectContext = appDel.managedObjectContext {
-            var request = NSFetchRequest(entityName: "Records")
-            request.returnsObjectsAsFaults = false
-            if let results = context.executeFetchRequest(request, error: nil) as? Array<NSManagedObject>{
-                if results.count > 0{
-                    records = results
-                }
-            }
-        }
     }
     
     func getGroupedProjects() {
@@ -84,16 +80,24 @@ class ReportView: UIView {
             projectsPercentage[key] = value / Double(totalTime)
         }
         
-        println("\(projects)")
+//        println("\(projects)")
+//        println("\(projectsPercentage)")
     }
+    
     
     func drawPieParts() {
         var lastAngle = 0.0
         var startHeight: CGFloat = 0
         var count = 0
-        if let view = superview {
-             startHeight = view.bounds.size.height * CGFloat(chartPart)
-        }
+//        if let view = superview {
+//             startHeight = view.bounds.size.height * CGFloat(chartPart)
+//        }
+        
+        var scrollView = UIScrollView(frame: CGRect(origin: CGPointMake(0,CGFloat(chartPart) * self.bounds.size.height), size: CGSize(width: self.bounds.size.width, height: CGFloat(1-chartPart) * self.bounds.size.height)))
+        scrollView.showsVerticalScrollIndicator = true
+        scrollView.scrollEnabled = true
+        scrollView.userInteractionEnabled = true
+
         for (key, value) in projectsPercentage {
             let layer = CAShapeLayer()
             let projectPath = UIBezierPath(
@@ -108,16 +112,26 @@ class ReportView: UIView {
 //            projectPath.addLineToPoint(CGPointMake(viewCenter.x + viewRadius, viewCenter.y))
             var color = getRandomColor()
             color.setStroke()
-//            projectPath.stroke()
             color.setFill()
             projectPath.fill()
             lastAngle += 2*M_PI*value
             
-            let notationOrigin = CGPointMake(CGFloat(count % notationsPerRow) * notationSize.width, startHeight + CGFloat(count / notationsPerRow) * notationSize.height)
+            let distance = self.bounds.size.width / CGFloat(notationDistanceRatio)
+            let originX = CGFloat(count % notationsPerRow) * (notationSize.width + distance)
+            let originY = CGFloat(Int(count / notationsPerRow) * 2) * notationSize.height + startHeight
+            let notationOrigin = CGPointMake(originX, originY)
             var frame = CGRect(origin: notationOrigin, size: notationSize)
             let notationView = UIView(frame: frame)
             notationView.backgroundColor = color
-            superview?.addSubview(notationView)
+            scrollView.addSubview(notationView)
+            
+            let textX = originX
+            let textY = originY + notationSize.height
+            var notationLabel = UILabel(frame: CGRect(x: textX, y: textY, width: notationSize.width, height: notationSize.height))
+            notationLabel.textAlignment = NSTextAlignment.Center
+            notationLabel.text = key
+            notationLabel.adjustsFontSizeToFitWidth = true
+            scrollView.addSubview(notationLabel)
             
             count += 1
             
@@ -132,10 +146,10 @@ class ReportView: UIView {
 //            animation.toValue = NSNumber(float: 1.0)
 //            layer.addAnimation(animation, forKey: nil)
         }
-    }
-    
-    func drawNotations() {
-        
+        scrollView.contentSize = CGSize(width: self.bounds.size.width, height: CGFloat(Int(count / notationsPerRow) * 2 + 2) * notationSize.height )
+//        scrollView.contentOffset = CGPointMake(0, CGFloat(0.7) * superview!.bounds.size.height)
+        self.addSubview(scrollView)
+//        println("scroll view subviews are \(scrollView.subviews)")
     }
     
     func getRandomColor() -> UIColor{

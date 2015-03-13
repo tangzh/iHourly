@@ -92,9 +92,6 @@ class RecordHistoryTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Record", forIndexPath: indexPath) as RecordHistoryTableViewCell
         let record = records[indexPath.section][indexPath.row]
-
-        // println("\(record)")
-        
         var showRecord = Record(data: record)
         
         cell.record = showRecord
@@ -103,15 +100,29 @@ class RecordHistoryTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
-        if let rdvc = segue.destinationViewController as? RecordDetailViewController {
+//        if let rdvc = segue.destinationViewController as? RecordDetailViewController {
+//            if let id = segue.identifier {
+//                switch(id) {
+//                case "showRecordDetail":
+//                    rdvc.title = "Detail"
+//                    if let selectedPath = tableView.indexPathForSelectedRow() {
+//                        rdvc.record = Record(data: records[selectedPath.section][selectedPath.row])
+//                    }
+//                default: println("entered deafult")
+//                }
+//            }
+//        }
+        
+        if let rdtvc = segue.destinationViewController as? RecordDetailTableViewController {
             if let id = segue.identifier {
                 switch(id) {
-                case "showRecordDetail":
-                    rdvc.title = "Detail"
-                    if let selectedPath = tableView.indexPathForSelectedRow() {
-                        rdvc.record = Record(data: records[selectedPath.section][selectedPath.row])
+                case "showDetail":
+                   rdtvc.title = "Table report"
+                   if let selectedPath = tableView.indexPathForSelectedRow() {
+                        rdtvc.record = Record(data: records[selectedPath.section][selectedPath.row])
                     }
-                default: println("entered deafult")
+                default:
+                    println("enter default")
                 }
             }
         }

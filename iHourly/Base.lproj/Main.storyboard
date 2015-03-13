@@ -121,7 +121,7 @@
                                     <outlet property="projectNameLabel" destination="ieh-0E-hy8" id="dYv-6q-mUi"/>
                                     <outlet property="startDateLabel" destination="Gad-VU-vQR" id="5zi-qO-aZC"/>
                                     <outlet property="timeLengthLabel" destination="yEy-Mm-vwt" id="ddh-Qp-RZc"/>
-                                    <segue destination="Hu5-cw-Bz7" kind="show" identifier="showRecordDetail" id="hjl-Km-7a2"/>
+                                    <segue destination="U8p-bj-yDF" kind="show" identifier="showDetail" id="vSd-Nj-E79"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -138,6 +138,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hP-9B-49G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="891" y="791"/>
+        </scene>
+        <!--Record Detail Table View Controller-->
+        <scene sceneID="HHd-Uc-N0K">
+            <objects>
+                <tableViewController id="U8p-bj-yDF" customClass="RecordDetailTableViewController" customModule="iHourly" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="rFr-Aa-1Jk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detail" rowHeight="60" id="V87-W5-HJc" customClass="DetailTextTableViewCell" customModule="iHourly" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="V87-W5-HJc" id="pYE-vY-Nbx">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUs-Aj-Oev">
+                                            <rect key="frame" x="8" y="8" width="584" height="43"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="hUs-Aj-Oev" secondAttribute="bottom" id="Cph-w5-bnt"/>
+                                        <constraint firstItem="hUs-Aj-Oev" firstAttribute="centerY" secondItem="pYE-vY-Nbx" secondAttribute="centerY" id="Wi7-aB-Zt5"/>
+                                        <constraint firstItem="hUs-Aj-Oev" firstAttribute="leading" secondItem="pYE-vY-Nbx" secondAttribute="leadingMargin" id="Xhx-ms-qeV"/>
+                                        <constraint firstItem="hUs-Aj-Oev" firstAttribute="trailing" secondItem="pYE-vY-Nbx" secondAttribute="trailingMargin" id="hO4-wd-dhV"/>
+                                        <constraint firstItem="hUs-Aj-Oev" firstAttribute="top" secondItem="pYE-vY-Nbx" secondAttribute="topMargin" id="upA-X9-Jbi"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Wi7-aB-Zt5"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailLabel" destination="hUs-Aj-Oev" id="33w-uc-5L2"/>
+                                    <outlet property="textLabel" destination="hUs-Aj-Oev" id="37S-gV-IsM"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="detailImage" rowHeight="109" id="P1Y-KQ-vuk" customClass="DetailImageTableViewCell" customModule="iHourly" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="P1Y-KQ-vuk" id="i4N-R1-v1g">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="faG-Vq-aDb">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="108"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="faG-Vq-aDb" secondAttribute="bottom" id="9fK-zh-jAC"/>
+                                        <constraint firstItem="faG-Vq-aDb" firstAttribute="top" secondItem="i4N-R1-v1g" secondAttribute="top" id="Ug7-uF-5m1"/>
+                                        <constraint firstAttribute="trailing" secondItem="faG-Vq-aDb" secondAttribute="trailing" id="ioN-P2-zKr"/>
+                                        <constraint firstItem="faG-Vq-aDb" firstAttribute="leading" secondItem="i4N-R1-v1g" secondAttribute="leading" id="zto-Hd-E3j"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detailImage" destination="faG-Vq-aDb" id="3EK-QX-JzB"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="U8p-bj-yDF" id="BbB-8B-W1L"/>
+                            <outlet property="delegate" destination="U8p-bj-yDF" id="kfF-m2-uUF"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="THG-NR-tJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1190" y="1680"/>
         </scene>
         <!--Record Detail View Controller-->
         <scene sceneID="RF9-qo-MND">
@@ -276,7 +347,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BUv-LW-VhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1551" y="791"/>
+            <point key="canvasLocation" x="1575" y="1062"/>
         </scene>
         <!--Report-->
         <scene sceneID="rVZ-JY-8Gy">
@@ -290,28 +361,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="56o-ke-BLv" customClass="ReportView" customModule="iHourly" customModuleProvider="target">
+                            <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="56o-ke-BLv" customClass="ReportView" customModule="iHourly" customModuleProvider="target">
                                 <rect key="frame" x="16" y="72" width="568" height="471"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="568" id="Bqm-aa-q4w"/>
+                                    <constraint firstAttribute="height" constant="471" id="hx8-yy-oXN"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bqm-aa-q4w"/>
+                                        <exclude reference="hx8-yy-oXN"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="56o-ke-BLv" secondAttribute="trailing" id="HbN-HM-bbt"/>
-                            <constraint firstItem="qG8-cB-Rm0" firstAttribute="top" secondItem="56o-ke-BLv" secondAttribute="bottom" constant="8" symbolic="YES" id="Lbk-O5-vYf"/>
-                            <constraint firstItem="56o-ke-BLv" firstAttribute="leading" secondItem="YEF-Jh-HHj" secondAttribute="leadingMargin" id="Mrq-AM-lzY"/>
-                            <constraint firstItem="56o-ke-BLv" firstAttribute="top" secondItem="9yv-PU-gjb" secondAttribute="bottom" constant="8" symbolic="YES" id="OMR-zL-irO"/>
-                            <constraint firstItem="56o-ke-BLv" firstAttribute="top" secondItem="YEF-Jh-HHj" secondAttribute="topMargin" id="lvg-u8-wZQ"/>
+                            <constraint firstItem="qG8-cB-Rm0" firstAttribute="top" secondItem="56o-ke-BLv" secondAttribute="bottom" constant="8" symbolic="YES" id="8fE-cX-vlU"/>
+                            <constraint firstItem="56o-ke-BLv" firstAttribute="trailing" secondItem="YEF-Jh-HHj" secondAttribute="trailingMargin" id="FSQ-a2-jH8"/>
+                            <constraint firstItem="56o-ke-BLv" firstAttribute="top" secondItem="9yv-PU-gjb" secondAttribute="bottom" constant="8" symbolic="YES" id="fYB-bZ-vRl"/>
+                            <constraint firstItem="56o-ke-BLv" firstAttribute="centerY" secondItem="YEF-Jh-HHj" secondAttribute="centerY" id="ouz-uc-G6W"/>
+                            <constraint firstItem="56o-ke-BLv" firstAttribute="leading" secondItem="YEF-Jh-HHj" secondAttribute="leadingMargin" id="qc3-qR-jAf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="lvg-u8-wZQ"/>
+                                <exclude reference="ouz-uc-G6W"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Report" id="w3e-Ui-OtM"/>
                     <connections>
-                        <outlet property="reportView" destination="56o-ke-BLv" id="dWY-0l-2mE"/>
+                        <outlet property="reportView" destination="56o-ke-BLv" id="E8x-Uv-wpe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wnq-sR-2kL" userLabel="First Responder" sceneMemberID="firstResponder"/>
