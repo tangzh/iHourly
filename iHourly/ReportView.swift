@@ -51,9 +51,6 @@ class ReportView: UIView {
         projects.removeAll()
         projectsPercentage.removeAll()
         for view in self.subviews  {
-//            if view is UILabel {
-//               view.removeFromSuperview()
-//            }
             view.removeFromSuperview()
         }
         

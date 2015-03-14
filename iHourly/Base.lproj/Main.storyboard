@@ -210,6 +210,99 @@
             </objects>
             <point key="canvasLocation" x="1190" y="1680"/>
         </scene>
+        <!--Filter-->
+        <scene sceneID="5Cf-Mh-enx">
+            <objects>
+                <viewController id="zIE-z0-SGK" customClass="ReportFilterViewController" customModule="iHourly" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bHz-CX-M5x"/>
+                        <viewControllerLayoutGuide type="bottom" id="F19-AO-EYo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TyJ-aZ-b1g">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Ss-URR">
+                                <rect key="frame" x="23" y="84" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="M63-0u-U1n">
+                                <rect key="frame" x="16" y="312" width="568" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="447973510.88006002">
+                                    <!--2015-03-13 21:05:10 +0000-->
+                                </date>
+                            </datePicker>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="cKT-As-ePr">
+                                <rect key="frame" x="16" y="113" width="568" height="162"/>
+                                <date key="date" timeIntervalSinceReferenceDate="447968863.20960701">
+                                    <!--2015-03-13 19:47:43 +0000-->
+                                </date>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E97-zR-YMN">
+                                <rect key="frame" x="114" y="84" width="470" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YP2-Vp-Tlw">
+                                <rect key="frame" x="107" y="283" width="477" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End Date:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nDr-iA-Fzq">
+                                <rect key="frame" x="23" y="283" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E97-zR-YMN" firstAttribute="baseline" secondItem="K3h-Ss-URR" secondAttribute="baseline" id="Dx0-A8-ka1"/>
+                            <constraint firstItem="M63-0u-U1n" firstAttribute="top" secondItem="nDr-iA-Fzq" secondAttribute="bottom" constant="8" symbolic="YES" id="HtU-cl-yLN"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cKT-As-ePr" secondAttribute="trailing" id="J1J-7E-B3r"/>
+                            <constraint firstItem="nDr-iA-Fzq" firstAttribute="top" secondItem="cKT-As-ePr" secondAttribute="bottom" constant="8" symbolic="YES" id="Jnt-ig-pgy"/>
+                            <constraint firstItem="E97-zR-YMN" firstAttribute="trailing" secondItem="TyJ-aZ-b1g" secondAttribute="trailingMargin" id="N4P-PM-sXW"/>
+                            <constraint firstItem="nDr-iA-Fzq" firstAttribute="top" secondItem="K3h-Ss-URR" secondAttribute="bottom" constant="8" symbolic="YES" id="O6S-Lj-wWy"/>
+                            <constraint firstItem="K3h-Ss-URR" firstAttribute="leading" secondItem="TyJ-aZ-b1g" secondAttribute="leadingMargin" constant="7" id="OAv-ex-udU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="YP2-Vp-Tlw" secondAttribute="trailing" id="Omz-3u-eue"/>
+                            <constraint firstItem="cKT-As-ePr" firstAttribute="leading" secondItem="TyJ-aZ-b1g" secondAttribute="leadingMargin" id="TGD-f5-OjW"/>
+                            <constraint firstItem="cKT-As-ePr" firstAttribute="leading" secondItem="M63-0u-U1n" secondAttribute="leading" id="co1-xf-oBp"/>
+                            <constraint firstItem="YP2-Vp-Tlw" firstAttribute="leading" secondItem="nDr-iA-Fzq" secondAttribute="trailing" constant="8" symbolic="YES" id="dmB-4l-S5t"/>
+                            <constraint firstItem="YP2-Vp-Tlw" firstAttribute="baseline" secondItem="nDr-iA-Fzq" secondAttribute="baseline" id="jjJ-WC-gIs"/>
+                            <constraint firstItem="cKT-As-ePr" firstAttribute="trailing" secondItem="M63-0u-U1n" secondAttribute="trailing" id="k9c-ce-our"/>
+                            <constraint firstItem="K3h-Ss-URR" firstAttribute="top" secondItem="bHz-CX-M5x" secondAttribute="bottom" constant="20" id="vgf-6W-JCg"/>
+                            <constraint firstItem="nDr-iA-Fzq" firstAttribute="leading" secondItem="K3h-Ss-URR" secondAttribute="leading" id="wq6-ub-RNM"/>
+                            <constraint firstItem="cKT-As-ePr" firstAttribute="top" secondItem="K3h-Ss-URR" secondAttribute="bottom" constant="8" symbolic="YES" id="y0S-Bs-EW8"/>
+                            <constraint firstItem="E97-zR-YMN" firstAttribute="leading" secondItem="K3h-Ss-URR" secondAttribute="trailing" constant="8" symbolic="YES" id="zXM-mM-Tg2"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="O6S-Lj-wWy"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Filter" id="J7e-Vd-mOW">
+                        <barButtonItem key="leftBarButtonItem" title="Done" id="qWR-tp-hnC">
+                            <connections>
+                                <action selector="doneFilter:" destination="zIE-z0-SGK" id="aNu-rn-zy9"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="endDate" destination="M63-0u-U1n" id="Ht0-BQ-kua"/>
+                        <outlet property="endDateLabel" destination="YP2-Vp-Tlw" id="MLv-wz-j9u"/>
+                        <outlet property="startDate" destination="cKT-As-ePr" id="dwL-0X-Cmc"/>
+                        <outlet property="startDateLabel" destination="E97-zR-YMN" id="YYt-Hc-eEz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GjZ-EX-GLi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1190" y="2366"/>
+        </scene>
         <!--Record Detail View Controller-->
         <scene sceneID="RF9-qo-MND">
             <objects>
@@ -390,7 +483,14 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Report" id="w3e-Ui-OtM"/>
+                    <tabBarItem key="tabBarItem" title="Item" id="p5X-UM-Jo2"/>
+                    <navigationItem key="navigationItem" title="Report" id="w3e-Ui-OtM">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="qT6-k8-dPy">
+                            <connections>
+                                <segue destination="EI6-d2-ycr" kind="presentation" identifier="filter" id="VDz-De-w8V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="reportView" destination="56o-ke-BLv" id="E8x-Uv-wpe"/>
                     </connections>
@@ -908,6 +1008,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yor-6n-alq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-491" y="1579"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pFp-ws-Xds">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="EI6-d2-ycr" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GHa-4C-kEV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zIE-z0-SGK" kind="relationship" relationship="rootViewController" id="he8-FQ-6o3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gRh-rz-B8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="378" y="2366"/>
         </scene>
     </scenes>
     <resources>

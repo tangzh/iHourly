@@ -10,7 +10,19 @@ import UIKit
 import CoreData
 
 class ReportViewController: UIViewController {
-
+//    var startDateFilter: NSDate?
+//    var endDateFilter: NSDate?
+    struct filterKey {
+        static let start = "startDateFilter"
+        static let end = "endDateFilter"
+    }
+    
+//    struct filters {
+//        let startDateFilter: NSDate
+//        let endDateFilter: NSDate
+//    }
+    var filter = Filter()
+    
     @IBOutlet weak var reportView: ReportView!
     
     override func viewDidLoad() {
@@ -27,19 +39,43 @@ class ReportViewController: UIViewController {
             if let results = context.executeFetchRequest(request, error: nil) as? Array<NSManagedObject>{
                 if results.count >= 0{
                     reportView.records = results
+                    if let startDateFilter = filter.startDateFilter{
+                        reportView.records = reportView.records.filter {
+                            if let startDate = $0.valueForKey("starttime") as? NSDate {
+                                return startDate.timeIntervalSinceDate(startDateFilter) > 0
+                            }else {
+                                return true
+                            }
+                        }
+                    }
+                    if let endDateFilter = filter.endDateFilter {
+                        reportView.records = reportView.records.filter {
+                            if let endDate = $0.valueForKey("stoptime") as? NSDate {
+                                return endDate.timeIntervalSinceDate(endDateFilter) < 0
+                            }else {
+                                return true
+                            }
+                        }
+                    }
+
+                    
                 }
             }
         }
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "filter" {
+            if let rfvc = segue.destinationViewController.contentViewController as? ReportFilterViewController{
+                rfvc.filter = filter
+            }
+        }
+
     }
-    */
+    
 
 }
