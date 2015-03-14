@@ -16,15 +16,15 @@ class ReportView: UIView {
             setNeedsDisplay()
         }
     }
-    var projects = [String : Double]()
-    var projectsPercentage = [String : Double]()
-    var chartPart = 0.8
+    private var projects = [String : Double]()
+    private var projectsPercentage = [String : Double]()
+    private var chartPart = 0.8
     
-    var viewCenter: CGPoint {
+    private var viewCenter: CGPoint {
         var centerFromView = convertPoint(center, fromView: superview)
         return CGPointMake(self.bounds.midX, self.bounds.midY * CGFloat(chartPart))
     }
-    var viewRadius: CGFloat {
+    private var viewRadius: CGFloat {
         return min(bounds.size.width, bounds.size.height) / 2 * CGFloat(chartPart)
     }
     
@@ -60,7 +60,7 @@ class ReportView: UIView {
         
     }
     
-    func getGroupedProjects() {
+    private func getGroupedProjects() {
         var totalTime = 0
         for record in records {
             if let project = record.valueForKey("project") as? String {
@@ -81,7 +81,7 @@ class ReportView: UIView {
     }
     
     
-    func drawPieParts() {
+    private func drawPieParts() {
         var lastAngle = 0.0
         var startHeight: CGFloat = 0
         var count = 0
@@ -133,7 +133,7 @@ class ReportView: UIView {
         self.addSubview(scrollView)
     }
     
-    func showNoResult() {
+    private func showNoResult() {
         var alertLabel = UILabel(frame:CGRect(x: 0, y: viewCenter.y, width: self.bounds.width, height: 60))
         alertLabel.textAlignment = NSTextAlignment.Center
         alertLabel.text = "There is no data for the report."
@@ -141,7 +141,7 @@ class ReportView: UIView {
         self.addSubview(alertLabel)
     }
     
-    func getRandomColor() -> UIColor{
+    private func getRandomColor() -> UIColor{
         var randomRed:CGFloat = CGFloat(drand48())
         var randomGreen:CGFloat = CGFloat(drand48())
         var randomBlue:CGFloat = CGFloat(drand48())

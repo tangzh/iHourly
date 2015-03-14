@@ -24,7 +24,7 @@ class RecordDetailTableViewController: UITableViewController {
     
     private var recordDetails = [RecordDetail]()
     
-    func getGroupedRecordDetail() {
+    private func getGroupedRecordDetail() {
         if let currentRecord = record {
             if let projectName = currentRecord.projectName {
                 recordDetails.append( RecordDetail(title: "Project", values: [projectName], group: "detail") )

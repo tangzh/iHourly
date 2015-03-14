@@ -10,7 +10,7 @@ import UIKit
 
 
 class ReportFilterViewController: UIViewController {
-    var dateFormatter = NSDateFormatter()
+    private var dateFormatter = NSDateFormatter()
     
     var filter: Filter?
 
@@ -31,7 +31,7 @@ class ReportFilterViewController: UIViewController {
         endDate.addTarget(self, action: "endDateChanged:", forControlEvents: UIControlEvents.ValueChanged)
     }
     
-    func initDateFormatter() {
+    private func initDateFormatter() {
         dateFormatter.dateStyle = NSDateFormatterStyle.ShortStyle
         dateFormatter.timeStyle = NSDateFormatterStyle.ShortStyle
     }
