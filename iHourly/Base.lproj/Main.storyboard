@@ -746,7 +746,7 @@
                                 <action selector="done:" destination="ReG-9v-HwO" id="SIm-e8-CXv"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Take" id="Eoz-7S-c1T">
+                        <barButtonItem key="rightBarButtonItem" image="Camera" id="Eoz-7S-c1T">
                             <connections>
                                 <action selector="takePhoto:" destination="ReG-9v-HwO" id="AUR-yb-sfQ"/>
                             </connections>
@@ -893,6 +893,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Camera" width="50" height="50"/>
         <image name="chart" width="25" height="25"/>
         <image name="record" width="25" height="25"/>
         <image name="timer" width="25" height="25"/>
