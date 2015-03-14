@@ -76,8 +76,6 @@ class AddPhotoViewController: UIViewController, UIImagePickerControllerDelegate,
                     if let path = url.absoluteString {
                         if imageData.writeToURL(url, atomically: true) {
                             record?.photoUrl = "\(unique).jpg"
-                            println("write in \(url)")
-                            println("store path in \(path)")
                         }
                     }
                 }

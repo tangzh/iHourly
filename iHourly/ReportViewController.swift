@@ -10,17 +10,7 @@ import UIKit
 import CoreData
 
 class ReportViewController: UIViewController {
-//    var startDateFilter: NSDate?
-//    var endDateFilter: NSDate?
-    struct filterKey {
-        static let start = "startDateFilter"
-        static let end = "endDateFilter"
-    }
-    
-//    struct filters {
-//        let startDateFilter: NSDate
-//        let endDateFilter: NSDate
-//    }
+
     var filter = Filter()
     
     @IBOutlet weak var reportView: ReportView!
@@ -31,7 +21,6 @@ class ReportViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("will appear")
         var appDel: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
         if let context: NSManagedObjectContext = appDel.managedObjectContext {
             var request = NSFetchRequest(entityName: "Records")
@@ -57,8 +46,6 @@ class ReportViewController: UIViewController {
                             }
                         }
                     }
-
-                    
                 }
             }
         }

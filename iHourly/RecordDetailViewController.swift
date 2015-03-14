@@ -16,7 +16,6 @@ class RecordDetailViewController: UIViewController {
         }
     }
     
-    
     @IBOutlet weak var projectName: UILabel!
     @IBOutlet weak var starttimeLabel: UILabel!
     @IBOutlet weak var stoptimeLabel: UILabel!
@@ -25,7 +24,6 @@ class RecordDetailViewController: UIViewController {
     
     func updateUI() {
         if let record = self.record {
-//            println("\(record)")
             projectName?.text = record.projectName
             starttimeLabel?.text = record.getLocalDate(record.starttime)
             stoptimeLabel?.text = record.getLocalDate(record.stoptime)

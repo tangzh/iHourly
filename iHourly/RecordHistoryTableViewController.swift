@@ -99,19 +99,6 @@ class RecordHistoryTableViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-
-//        if let rdvc = segue.destinationViewController as? RecordDetailViewController {
-//            if let id = segue.identifier {
-//                switch(id) {
-//                case "showRecordDetail":
-//                    rdvc.title = "Detail"
-//                    if let selectedPath = tableView.indexPathForSelectedRow() {
-//                        rdvc.record = Record(data: records[selectedPath.section][selectedPath.row])
-//                    }
-//                default: println("entered deafult")
-//                }
-//            }
-//        }
         
         if let rdtvc = segue.destinationViewController as? RecordDetailTableViewController {
             if let id = segue.identifier {
@@ -149,31 +136,4 @@ class RecordHistoryTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -24,7 +24,6 @@
 		249B57B41AA8E08B0070F85C /* RecordHistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */; };
 		249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */; };
 		249B57B81AA8FC080070F85C /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B71AA8FC080070F85C /* Record.swift */; };
-		249B57BA1AA95BEC0070F85C /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249B57B91AA95BEC0070F85C /* Helper.swift */; };
 		24A071BA1AB01E98003CB080 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A071B91AB01E98003CB080 /* ReportViewController.swift */; };
 		24A071BC1AB01ED9003CB080 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A071BB1AB01ED9003CB080 /* ReportView.swift */; };
 		24E81D2C1AAE59A60016145A /* RecordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */; };
@@ -62,7 +61,6 @@
 		249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordHistoryTableViewController.swift; sourceTree = "<group>"; };
 		249B57B51AA8E28F0070F85C /* RecordHistoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		249B57B71AA8FC080070F85C /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
-		249B57B91AA95BEC0070F85C /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		24A071B91AB01E98003CB080 /* ReportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		24A071BB1AB01ED9003CB080 /* ReportView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		24E81D2B1AAE59A60016145A /* RecordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordDetailViewController.swift; sourceTree = "<group>"; };
@@ -123,7 +121,6 @@
 				2406FF5E1AB3DA8A007B98E8 /* Filter.swift */,
 				249B57B31AA8E08B0070F85C /* RecordHistoryTableViewController.swift */,
 				244F25CD1AA40307005A5280 /* AppDelegate.swift */,
-				249B57B91AA95BEC0070F85C /* Helper.swift */,
 				249B57B01AA8C5580070F85C /* CoreData.xcdatamodeld */,
 				244F25CB1AA40307005A5280 /* Supporting Files */,
 			);
@@ -258,7 +255,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				249B57B61AA8E28F0070F85C /* RecordHistoryTableViewCell.swift in Sources */,
-				249B57BA1AA95BEC0070F85C /* Helper.swift in Sources */,
 				24A071BC1AB01ED9003CB080 /* ReportView.swift in Sources */,
 				24E81D2C1AAE59A60016145A /* RecordDetailViewController.swift in Sources */,
 				244F25EE1AA41481005A5280 /* TimerViewController.swift in Sources */,

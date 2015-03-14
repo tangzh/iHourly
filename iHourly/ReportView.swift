@@ -20,9 +20,6 @@ class ReportView: UIView {
     var projectsPercentage = [String : Double]()
     var chartPart = 0.8
     
-//    var selfWidth = self.bounds.size.width
-//    var selfHeight = self.bounds.size.height
-    
     var viewCenter: CGPoint {
         var centerFromView = convertPoint(center, fromView: superview)
         return CGPointMake(self.bounds.midX, self.bounds.midY * CGFloat(chartPart))
@@ -55,7 +52,12 @@ class ReportView: UIView {
         }
         
         getGroupedProjects()
-        drawPieParts()
+        if projects.count == 0 {
+            showNoResult()
+        }else {
+           drawPieParts()
+        }
+        
     }
     
     func getGroupedProjects() {
@@ -76,9 +78,6 @@ class ReportView: UIView {
         for(key, value) in projects {
             projectsPercentage[key] = value / Double(totalTime)
         }
-        
-//        println("\(projects)")
-//        println("\(projectsPercentage)")
     }
     
     
@@ -86,9 +85,6 @@ class ReportView: UIView {
         var lastAngle = 0.0
         var startHeight: CGFloat = 0
         var count = 0
-//        if let view = superview {
-//             startHeight = view.bounds.size.height * CGFloat(chartPart)
-//        }
         
         var scrollView = UIScrollView(frame: CGRect(origin: CGPointMake(0,CGFloat(chartPart) * self.bounds.size.height), size: CGSize(width: self.bounds.size.width, height: CGFloat(1-chartPart) * self.bounds.size.height)))
         scrollView.showsVerticalScrollIndicator = true
@@ -106,7 +102,7 @@ class ReportView: UIView {
             )
             projectPath.lineWidth = lineWidth
             projectPath.addLineToPoint(viewCenter)
-//            projectPath.addLineToPoint(CGPointMake(viewCenter.x + viewRadius, viewCenter.y))
+
             var color = getRandomColor()
             color.setStroke()
             color.setFill()
@@ -131,22 +127,18 @@ class ReportView: UIView {
             scrollView.addSubview(notationLabel)
             
             count += 1
-            
-//            layer.path = projectPath.CGPath
-//            layer.fillColor = color.CGColor
-//            self.layer.addSublayer(layer)
-//            let animation = CABasicAnimation(keyPath: "path")
-//            animation.fillMode = kCAFillModeForwards
-//            animation.duration = 2
-//            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-//            animation.fromValue = NSNumber(double: lastAngle)
-//            animation.toValue = NSNumber(float: 1.0)
-//            layer.addAnimation(animation, forKey: nil)
         }
         scrollView.contentSize = CGSize(width: self.bounds.size.width, height: CGFloat(Int(count / notationsPerRow) * 2 + 2) * notationSize.height )
-//        scrollView.contentOffset = CGPointMake(0, CGFloat(0.7) * superview!.bounds.size.height)
+
         self.addSubview(scrollView)
-//        println("scroll view subviews are \(scrollView.subviews)")
+    }
+    
+    func showNoResult() {
+        var alertLabel = UILabel(frame:CGRect(x: 0, y: viewCenter.y, width: self.bounds.width, height: 60))
+        alertLabel.textAlignment = NSTextAlignment.Center
+        alertLabel.text = "There is no data for the report."
+        alertLabel.adjustsFontSizeToFitWidth = true
+        self.addSubview(alertLabel)
     }
     
     func getRandomColor() -> UIColor{

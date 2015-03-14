@@ -25,6 +25,8 @@ class ReportFilterViewController: UIViewController {
         initDateFormatter()
         startDateLabel.text = dateFormatter.stringFromDate(filter?.startDateFilter ?? NSDate() )
         endDateLabel.text = dateFormatter.stringFromDate(filter?.endDateFilter ?? NSDate())
+        startDate.date = filter?.startDateFilter ?? NSDate()
+        endDate.date = filter?.endDateFilter ?? NSDate()
         startDate.addTarget(self, action: Selector("startDateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
         endDate.addTarget(self, action: "endDateChanged:", forControlEvents: UIControlEvents.ValueChanged)
     }

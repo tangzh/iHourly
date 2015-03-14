@@ -33,7 +33,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         super.viewDidLoad()
         refreshProjects()
         initProjectPicker()
-        controlButton.setTitleColor(UIColor.uicolorFromHex(0x33691E), forState: .Normal)
+        controlButton.setTitleColor(UIColor.uicolorFromHex(0x01d1cd), forState: .Normal)
     }
     
     override func viewWillLayoutSubviews() {
@@ -79,7 +79,7 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             stoptime = NSDate()
             timer.invalidate()
             showAlert()
-            controlButton.setTitleColor(UIColor.uicolorFromHex(0x2E7D32), forState: .Normal)
+            controlButton.setTitleColor(UIColor.uicolorFromHex(0x01d1cd), forState: .Normal)
         }
     }
     
@@ -90,7 +90,6 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
             let flags: NSCalendarUnit = .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit
             
             timeRecorded = calendar.components(flags, fromDate: starttime, toDate: current, options: nil)//current - starttime
-            //            println("\(starttime) \(current)")
             
             let hour = timeRecorded.hour
             let hourLabel = formateTime(hour)
@@ -212,7 +211,6 @@ class TimerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addNote" {
             if let anvc = segue.destinationViewController.contentViewController as? AddNoteViewController {
-                println("segue record")
                 anvc.record = record
             }
         }else if segue.identifier == "addPhoto" {
