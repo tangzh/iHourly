@@ -141,6 +141,7 @@ class ReportView: UIView {
         self.addSubview(alertLabel)
     }
     
+    // Citation: http://classictutorials.com/2014/08/generate-a-random-color-in-swift/
     private func getRandomColor() -> UIColor{
         var randomRed:CGFloat = CGFloat(drand48())
         var randomGreen:CGFloat = CGFloat(drand48())

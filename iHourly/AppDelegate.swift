@@ -4,7 +4,7 @@
 //
 //  Created by tang on 3/1/15.
 //  Copyright (c) 2015 Stanford Univeristy. All rights reserved.
-//  Citation: https://coderwall.com/p/dyqrfa/customize-navigation-bar-appearance-with-swift
+
 
 import UIKit
 import CoreData
@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+//  Citation: https://coderwall.com/p/dyqrfa/customize-navigation-bar-appearance-with-swift
 extension UIColor {
     class func uicolorFromHex(rgbValue: UInt32) -> UIColor {
         let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0

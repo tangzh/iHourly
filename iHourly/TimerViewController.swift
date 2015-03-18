@@ -5,7 +5,8 @@
 //  Created by tang on 3/1/15.
 //  Copyright (c) 2015 Stanford Univeristy. All rights reserved.
 //
-// Citation: http://rshankar.com/simple-stopwatch-app-in-swift/
+// Citation: Inspiration for timer from http://rshankar.com/simple-stopwatch-app-in-swift/
+// Citation: How to use pickerview as the input for textFiled http://stackoverflow.com/questions/14597902/bringing-up-a-uipickerview-rather-than-keyboard-input-ios
 
 import UIKit
 import CoreData
